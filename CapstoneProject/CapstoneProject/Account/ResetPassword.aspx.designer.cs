@@ -13,22 +13,31 @@ namespace CapstoneProject.Account {
     public partial class ResetPassword {
         
         /// <summary>
-        /// ErrorMessage control.
+        /// LtlErrorMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal ErrorMessage;
+        protected global::System.Web.UI.WebControls.Literal LtlErrorMessage;
         
         /// <summary>
-        /// Email control.
+        /// LtlSuccessMessage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox Email;
+        protected global::System.Web.UI.WebControls.Literal LtlSuccessMessage;
+        
+        /// <summary>
+        /// TxtUsername control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox TxtUsername;
         
         /// <summary>
         /// Password control.
@@ -47,5 +56,14 @@ namespace CapstoneProject.Account {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox ConfirmPassword;
+        
+        /// <summary>
+        /// BtnReset control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button BtnReset;
     }
 }

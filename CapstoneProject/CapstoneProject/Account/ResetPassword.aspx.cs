@@ -24,23 +24,22 @@ namespace CapstoneProject.Account
             {
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
 
-                var user = manager.FindByName(Email.Text);
+                var user = manager.FindByName(TxtUsername.Text);
                 if (user == null)
                 {
-                    ErrorMessage.Text = "No user found";
+                    LtlErrorMessage.Text = "No user found";
                     return;
                 }
                 var result = manager.ResetPassword(user.Id, code, Password.Text);
                 if (result.Succeeded)
                 {
-                    Response.Redirect("~/Account/ResetPasswordConfirmation");
-                    return;
+                    LtlSuccessMessage.Text = "Password successfully changed!";
                 }
-                ErrorMessage.Text = result.Errors.FirstOrDefault();
+                LtlErrorMessage.Text = result.Errors.FirstOrDefault();
                 return;
             }
 
-            ErrorMessage.Text = "An error has occurred";
+            LtlErrorMessage.Text = "An error has occurred";
         }
     }
 }

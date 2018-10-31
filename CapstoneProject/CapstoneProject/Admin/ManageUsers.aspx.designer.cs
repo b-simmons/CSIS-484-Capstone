@@ -7,27 +7,27 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace CapstoneProject {
+namespace CapstoneProject.Admin {
     
     
-    public partial class SiteMaster {
+    public partial class ManageUsers {
         
         /// <summary>
-        /// Head control.
+        /// GrUsers control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder Head;
+        protected global::System.Web.UI.WebControls.GridView GrUsers;
         
         /// <summary>
-        /// MainContent control.
+        /// BtnNewUser control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        protected global::System.Web.UI.WebControls.HyperLink BtnNewUser;
     }
 }

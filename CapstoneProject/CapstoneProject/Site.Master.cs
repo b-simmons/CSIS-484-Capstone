@@ -7,6 +7,7 @@ using System.Web.Security;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 
 namespace CapstoneProject
 {
@@ -75,6 +76,15 @@ namespace CapstoneProject
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
         {
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+        }
+
+        protected void LnkChangePassword_Click(object sender, EventArgs e)
+        {
+            var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            var user = manager.FindByName(Context.User.Identity.Name);
+            string code = manager.GeneratePasswordResetToken(user.Id);
+            string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
+            Response.Redirect(callbackUrl);
         }
     }
 
