@@ -16,12 +16,14 @@
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap-theme.css" />
     <link rel="stylesheet" type="text/css" href="/Content/bootstrap.css" />
     <link rel="stylesheet" type="text/css" href="/Content/Site.css" />
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.18/css/dataTables.bootstrap4.min.css"/>
 
     
     <script type="text/javascript" charset="utf8" src="/Scripts/jquery-3.3.1.js"></script>
     <script type="text/javascript" charset="utf8" src="/Scripts/bootstrap.js"></script>
-    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.18/js/dataTables.bootstrap4.min.js"></script>
+
     
     <asp:ContentPlaceHolder ID="Head" runat="server">
     </asp:ContentPlaceHolder>
@@ -52,7 +54,7 @@
                             <asp:RoleGroup Roles="Admin">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
-                                        <li><a runat="server" href="~/Default.aspx"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                                        <li><a runat="server" href="~/Default.aspx"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                         <li class="dropdown">
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers
                         <span class="caret"></span></a>
@@ -84,8 +86,8 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users (Admin Only)
                         <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Manage Users</a></li>
-                                                <li><a href="#">New User</a></li>
+                                                <li><a href="/Admin/ManageUsers.aspx">Manage Users</a></li>
+                                                <li><a href="/Admin/User.aspx">New User</a></li>
                                             </ul>
                                         </li>
                                     </ul>
