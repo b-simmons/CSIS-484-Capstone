@@ -11,6 +11,10 @@ using Microsoft.AspNet.Identity.Owin;
 
 namespace CapstoneProject
 {
+    /* Benjamin Simmons
+     * CSIS 484
+     * Site.Master.cs
+     */
     public partial class SiteMaster : MasterPage
     {
         private const string AntiXsrfTokenKey = "__AntiXsrfToken";
@@ -70,7 +74,6 @@ namespace CapstoneProject
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
         }
 
         protected void Unnamed_LoggingOut(object sender, LoginCancelEventArgs e)
@@ -78,8 +81,14 @@ namespace CapstoneProject
             Context.GetOwinContext().Authentication.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
         }
 
+        /// <summary>
+        /// This method handles the click event for the LnkChangePassword LinkButton
+        /// </summary>
+        /// <param name="sender">LnkChangePassword LinkButton</param>
+        /// <param name="e">Click event</param>
         protected void LnkChangePassword_Click(object sender, EventArgs e)
         {
+            //Redirect the user to the password reset page
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var user = manager.FindByName(Context.User.Identity.Name);
             string code = manager.GeneratePasswordResetToken(user.Id);

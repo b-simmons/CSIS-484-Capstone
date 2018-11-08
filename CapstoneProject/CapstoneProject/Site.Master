@@ -34,13 +34,14 @@
         <div class="navbar navbar-inverse">
             <div class="container">
                 <div class="row">
-                    <div class="col-md-2">
-                        <a href="~/Default.aspx">
-                            <img src="/Images/mapleSyrup.jpg" height="100px" width="160px" /></a>
-                    </div>
-                    <div class="col-md-10">
-                        <h2 class="site-title">Syrup Incorporated Ordering System</h2>
-                    </div>
+                    <a href="/Default.aspx">
+                        <div class="col-md-3">
+                                <img src="/Images/mapleSyrup.jpg" height="100px" width="160px" />
+                        </div>
+                        <div class="col-md-9">
+                            <h2 class="site-title">Syrup Incorporated Ordering System</h2>
+                        </div>
+                    </a>
                 </div>
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,7 +51,7 @@
                     </button>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <asp:LoginView runat="server" ViewStateMode="Disabled">
+                    <asp:LoginView ID="LGVNavbar" runat="server" ViewStateMode="Disabled">
                         <RoleGroups>
                             <asp:RoleGroup Roles="Admin">
                                 <ContentTemplate>
@@ -95,12 +96,46 @@
 
                                 </ContentTemplate>
                             </asp:RoleGroup>
+                            <asp:RoleGroup Roles="Sales Rep, Shipping Clerk">
+                                <ContentTemplate>
+                                    <ul class="nav navbar-nav">
+                                        <li><a runat="server" href="/Default.aspx"><span class="glyphicon glyphicon-home"></span> Home</a></li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers
+                        <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Manage Customers</a></li>
+                                                <li><a href="#">New Customer</a></li>
+                                                <li><a href="#">New Shipping Location</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
+                        <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">Manage Products</a></li>
+                                                <li><a href="#">New Product (Admin Only)</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders
+                        <span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="#">View All</a></li>
+                                                <li><a href="#">Search Orders</a></li>
+                                                <li><a href="#">Ship Order</a></li>
+                                                <li><a href="#">New Order</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </ContentTemplate>
+                            </asp:RoleGroup>
                         </RoleGroups>
                     </asp:LoginView>
                     <asp:LoginView runat="server" ViewStateMode="Disabled">
                         <AnonymousTemplate>
                             <ul class="nav navbar-nav navbar-right">
-                                <li><a runat="server" href="~/Account/Login">Log in</a></li>
+                                <li><a runat="server" href="/Account/Login">Log in</a></li>
                             </ul>
                         </AnonymousTemplate>
                         <LoggedInTemplate>
@@ -113,7 +148,7 @@
                                     </ul>
                                 </li>
                                 <li>
-                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="~/Account/Login.aspx" OnLoggingOut="Unnamed_LoggingOut" />
+                                    <asp:LoginStatus runat="server" LogoutAction="Redirect" LogoutText="Log off" LogoutPageUrl="/Account/Login.aspx" OnLoggingOut="Unnamed_LoggingOut" />
                                 </li>
                             </ul>
                         </LoggedInTemplate>

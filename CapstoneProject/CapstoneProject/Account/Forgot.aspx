@@ -1,7 +1,7 @@
 ﻿<%@ Page Title="Forgot password" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Forgot.aspx.cs" Inherits="CapstoneProject.Account.ForgotPassword" Async="true" %>
 
 <asp:Content runat="server" ID="BodyContent" ContentPlaceHolderID="MainContent">
-    <h2><%: Title %>.</h2>
+    <h2 class="text-center"><%: Title %></h2>
 
     <div class="row">
         <div class="col-md-8">
@@ -15,11 +15,11 @@
                         </p>
                     </asp:PlaceHolder>
                     <div class="form-group">
-                        <asp:Label runat="server" AssociatedControlID="Email" CssClass="col-md-2 control-label">Email</asp:Label>
+                        <asp:Label runat="server" AssociatedControlID="TxtUsername" CssClass="col-md-2 control-label">Username</asp:Label>
                         <div class="col-md-10">
-                            <asp:TextBox runat="server" ID="Email" CssClass="form-control" TextMode="Email" />
-                            <asp:RequiredFieldValidator runat="server" ControlToValidate="Email"
-                                CssClass="text-danger" ErrorMessage="The email field is required." EnableClientScript="true" />
+                            <asp:TextBox runat="server" ID="TxtUsername" CssClass="form-control" />
+                            <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtUsername"
+                                CssClass="text-danger" ErrorMessage="The Username field is required." EnableClientScript="true" />
                         </div>
                     </div>
                     <div class="form-group">

@@ -42,9 +42,7 @@
                     </div>
                 </div>
                 <p>
-                    <%-- Enable this once you have account confirmation enabled for password reset functionality
-                    <asp:HyperLink runat="server" ID="ForgotPasswordHyperLink" ViewStateMode="Disabled">Forgot your password?</asp:HyperLink>
-                    --%>
+                    <a href="Forgot.aspx">Forgot your password?</a>
                 </p>
             </section>
         </div>

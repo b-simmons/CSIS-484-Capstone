@@ -20,20 +20,23 @@ namespace CapstoneProject.Account
             {
                 // Validate the user's email address
                 var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
-                ApplicationUser user = manager.FindByEmail(Email.Text);
+                ApplicationUser user = manager.FindByName(TxtUsername.Text);
                 if (user == null)
                 {
                     FailureText.Text = "The user does not exist.";
                     ErrorMessage.Visible = true;
                     return;
                 }
-                // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
+
+                //Will not be enabled due to security concerns with email credentials in the web.config (I don't want to give my credentials to the class or professor by accident)
+                /*
                 // Send email with the code and the redirect to reset password page
                 string code = manager.GeneratePasswordResetToken(user.Id);
                 string callbackUrl = IdentityHelper.GetResetPasswordRedirectUrl(code, Request);
                 manager.SendEmail(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>.");
                 loginForm.Visible = false;
                 DisplayEmail.Visible = true;
+                */
             }
         }
     }
