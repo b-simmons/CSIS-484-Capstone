@@ -15,7 +15,7 @@
         <asp:Label ID="LblSuccessMessage" runat="server" Text=""></asp:Label>
     </div>
     <asp:GridView ID="GrOrders" runat="server" CssClass="table table-striped" AllowPaging="false" UseAccessibleHeader="true" AutoGenerateColumns="false"
-        DataKeyNames="OrderID, CustomerID, LocationID">
+        OnRowDataBound="GrOrders_RowDataBound" DataKeyNames="OrderID, CustomerID, LocationID">
         <Columns>
             <asp:TemplateField HeaderText="Order Date">
                 <ItemTemplate>

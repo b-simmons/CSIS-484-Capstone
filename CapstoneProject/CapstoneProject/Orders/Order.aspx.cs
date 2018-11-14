@@ -19,7 +19,7 @@ namespace CapstoneProject.Orders
      */
     public partial class Order : System.Web.UI.Page
     {
-        public DataTable orderContents
+        private DataTable orderContents
         {
             get
             {
@@ -31,12 +31,18 @@ namespace CapstoneProject.Orders
             }
         }
 
+        private CapstoneEntities context = new CapstoneEntities();
+        private bool isEdit = false;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+
+            if (!String.IsNullOrWhiteSpace(Request.QueryString["orderid"]))
+                isEdit = true;
+
             if (!IsPostBack)
             {
                 //Get all customers
-                CapstoneEntities context = new CapstoneEntities();
                 List<Models.Customer> allCustomers = context.Customers.ToList();
                 DDLCustomer.DataSource = allCustomers;
                 DDLCustomer.DataBind();
@@ -55,11 +61,51 @@ namespace CapstoneProject.Orders
 
                 //Create the datatable columns
                 DataTable table = new DataTable();
+                table.Columns.Add("OrderLineID");
                 table.Columns.Add("ProductID");
                 table.Columns.Add("ProductName");
                 table.Columns.Add("Quantity");
                 table.Columns.Add("LineTotal");
                 orderContents = table;
+
+                if(isEdit)
+                {
+                    //Get the order ID
+                    int orderID = Convert.ToInt32(Request.QueryString["orderid"]);
+
+                    //Get the order object
+                    Models.Order order = context.Orders.Where(o => o.OrderID == orderID).FirstOrDefault();
+
+                    //Set the input field values
+                    TxtOrderDate.Text = order.OrderDate.ToString("MM/dd/yy");
+                    DDLCustomer.SelectedValue = order.CustomerID.ToString();
+
+                    //Get all locations for the customer
+                    var locations = from l in context.Locations
+                                    where l.CustomerID == order.CustomerID
+                                    select l;
+
+                    //Bind the locations drop-down
+                    DDLLocation.DataSource = locations.ToList();
+                    DDLLocation.DataBind();
+                    DDLLocation.Items.Insert(0, new ListItem("--Select--", "-1"));
+
+                    //Enable the locations drop-down and select the proper value
+                    DDLLocation.Enabled = true;
+                    DDLLocation.SelectedValue = order.LocationID.ToString();
+
+                    //Fill the datatable
+                    foreach(Models.OrderLine line in order.OrderLines)
+                    {
+                        DataRow row = table.NewRow();
+                        row["OrderLineID"] = line.OrderLineID;
+                        row["ProductID"] = line.ProductID;
+                        row["ProductName"] = line.Product.ProductName;
+                        row["Quantity"] = line.Quantity;
+                        row["LineTotal"] = line.Product.Price * line.Quantity;
+                        orderContents.Rows.Add(row);
+                    }
+                }
             }
             //Bind the order contents gridview
             GrOrderContents.DataSource = orderContents;
@@ -78,7 +124,6 @@ namespace CapstoneProject.Orders
             int quantity = Convert.ToInt32(TxtQuantity.Text);
 
             //Get the product object
-            CapstoneEntities context = new CapstoneEntities();
             var product = context.Products
                     .Where(p => p.ProductID == productID)
                     .FirstOrDefault();
@@ -88,6 +133,7 @@ namespace CapstoneProject.Orders
             {
                 //Add the new product to the order
                 DataRow row = orderContents.NewRow();
+                row["OrderLineID"] = 0;
                 row["ProductID"] = productID;
                 row["ProductName"] = product.ProductName;
                 row["Quantity"] = quantity;
@@ -111,9 +157,6 @@ namespace CapstoneProject.Orders
             //Reset the inputs
             DDLProduct.SelectedIndex = 0;
             TxtQuantity.Text = "";
-
-            //Redirect the user
-            Response.Redirect("/Orders.aspx?sucessmessage=1");
         }
 
         /// <summary>
@@ -123,45 +166,86 @@ namespace CapstoneProject.Orders
         /// <param name="e">The click event</param>
         protected void BtnSubmit_Click(object sender, EventArgs e)
         {
-            CapstoneEntities entities = new CapstoneEntities();
+            Models.Order order = new Models.Order();
             //Get the user
             var manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             var user = manager.FindByName(User.Identity.Name);
 
-            //Create the order object
-            Models.Order order = new Models.Order();
-            order.OrderDate = Convert.ToDateTime(TxtOrderDate.Text);
-            order.CustomerID = Convert.ToInt32(DDLCustomer.SelectedValue);
-            order.LocationID = Convert.ToInt32(DDLLocation.SelectedValue);
-            order.SalesRepID = user.Id;
-            order.OrderTotal = 0.00m;
+            if (isEdit)
+            {
+                //Get the order object
+                int orderID = Convert.ToInt32(Request.QueryString["orderid"]);
+                order = context.Orders.Where(o => o.OrderID == orderID).FirstOrDefault();
 
-            //Save the order object
-            entities.Orders.Add(order);
-            entities.SaveChanges();
+                //Edit the information
+                order.OrderDate = Convert.ToDateTime(TxtOrderDate.Text);
+                order.CustomerID = Convert.ToInt32(DDLCustomer.SelectedValue);
+                order.LocationID = Convert.ToInt32(DDLLocation.SelectedValue);
+                order.SalesRepID = user.Id;
+                order.OrderTotal = 0.00m;
+
+                context.SaveChanges();
+            }
+            else
+            {
+                //Create the order object
+                order.OrderDate = Convert.ToDateTime(TxtOrderDate.Text);
+                order.CustomerID = Convert.ToInt32(DDLCustomer.SelectedValue);
+                order.LocationID = Convert.ToInt32(DDLLocation.SelectedValue);
+                order.SalesRepID = user.Id;
+                order.OrderTotal = 0.00m;
+
+                //Save the order object
+                context.Orders.Add(order);
+                context.SaveChanges();
+            }
 
             decimal total = 0.00m;
 
             //Loop through and add all order lines
             foreach(DataRow row in orderContents.Rows)
             {
+                Models.OrderLine orderLine;
+                int orderLineID = Convert.ToInt32(row["OrderLineID"]);
+
                 //Add to the total
                 total += Convert.ToDecimal(row["LineTotal"]);
 
-                //Create the OrderLine object
-                Models.OrderLine orderLine = new Models.OrderLine();
-                orderLine.OrderID = order.OrderID;
-                orderLine.ProductID = Convert.ToInt32(row["ProductID"]);
-                orderLine.Quantity = Convert.ToInt32(row["Quantity"]);
+                //If the id is over 0, this is an edit
+                if (orderLineID != 0)
+                {
+                    //Edit the order line
+                    orderLine = context.OrderLines.Where(l => l.OrderLineID == orderLineID).FirstOrDefault();
+                    orderLine.OrderID = order.OrderID;
+                    orderLine.ProductID = Convert.ToInt32(row["ProductID"]);
+                    orderLine.Quantity = Convert.ToInt32(row["Quantity"]);
+                    context.SaveChanges();
+                }
+                else
+                {
+                    //Create the order line
+                    orderLine = new Models.OrderLine();
+                    orderLine.OrderID = order.OrderID;
+                    orderLine.ProductID = Convert.ToInt32(row["ProductID"]);
+                    orderLine.Quantity = Convert.ToInt32(row["Quantity"]);
 
-                //Save the OrderLine object
-                entities.OrderLines.Add(orderLine);
-                entities.SaveChanges();
+                    //Save the OrderLine object
+                    context.OrderLines.Add(orderLine);
+                    context.SaveChanges();
+                }
+
+                //Edit the Product object
+                Models.Product product = context.Products.Where(p => p.ProductID == orderLine.ProductID).FirstOrDefault();
+                product.QuantityInStock -= orderLine.Quantity;
+                context.SaveChanges();
             }
 
             //Save the order total
             order.OrderTotal = total;
-            entities.SaveChanges();
+            context.SaveChanges();
+
+            //Redirect the user
+            Response.Redirect("/Orders/Orders.aspx?successmessage=1");
         }
 
         /// <summary>
@@ -174,10 +258,19 @@ namespace CapstoneProject.Orders
             //Get the product ID
             GridViewRow row = (GridViewRow)((LinkButton)sender).NamingContainer;
             int productID = Convert.ToInt32(GrOrderContents.DataKeys[row.RowIndex].Values["ProductID"]);
+            int orderLineID = Convert.ToInt32(GrOrderContents.DataKeys[row.RowIndex].Values["OrderLineID"]);
 
             //Get the row from the order contents table and remove it
             DataRow orderRow = orderContents.Select("ProductID Like '" + productID + "'").FirstOrDefault();
             orderContents.Rows.Remove(orderRow);
+
+            //If the row exists in the database, delete it
+            if(orderLineID != 0)
+            {
+                Models.OrderLine orderLine = context.OrderLines.Where(l => l.OrderLineID == orderLineID).FirstOrDefault();
+                context.OrderLines.Remove(orderLine);
+                context.SaveChanges();
+            }
 
             //Bind the order contents gridview
             GrOrderContents.DataSource = orderContents;
@@ -197,7 +290,6 @@ namespace CapstoneProject.Orders
                 int customerID = Convert.ToInt32(DDLCustomer.SelectedValue);
 
                 //Get all locations for the customer
-                CapstoneEntities context = new CapstoneEntities();
                 var locations = from l in context.Locations
                                  where l.CustomerID == customerID
                                  select l;

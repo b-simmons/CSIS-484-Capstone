@@ -75,5 +75,18 @@ namespace CapstoneProject.Orders
             //Redirect the user
             Response.Redirect("/Orders/Order.aspx?orderid=" + orderID);
         }
+
+        /// <summary>
+        /// This method handles the RowDataBound event for the GrOrders gridview and ensures that 
+        /// the DataTables JQuery plugin works properly.
+        /// </summary>
+        /// <param name="sender">The GrOrders gridview</param>
+        /// <param name="e">The RowDataBound event</param>
+        protected void GrOrders_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            //Set the header
+            if (e.Row.RowType == DataControlRowType.Header)
+                e.Row.TableSection = TableRowSection.TableHeader;
+        }
     }
 }
