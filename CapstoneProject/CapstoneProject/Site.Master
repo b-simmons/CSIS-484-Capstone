@@ -81,7 +81,7 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Orders/Orders.aspx">Manage Orders</a></li>
                                                 <li><a href="#">Ship Order</a></li>
-                                                <li><a href="/Orders/Order.aspx?orderid=0">New Order</a></li>
+                                                <li><a href="/Orders/Order.aspx">New Order</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
@@ -123,7 +123,7 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Orders/Orders.aspx">Manage Orders</a></li>
                                                 <li><a href="#">Ship Order</a></li>
-                                                <li><a href="/Orders/Order.aspx?orderid=0">New Order</a></li>
+                                                <li><a href="/Orders/Order.aspx">New Order</a></li>
                                             </ul>
                                         </li>
                                     </ul>
