@@ -2,9 +2,9 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
-        $('document').ready(function () {
-            $(".number-only-2").mask("9?9");
-            $(".date-field").mask("99/99/99");
+        jQuery('document').ready(function () {
+            jQuery(".number-only-2").mask("9?9");
+            jQuery(".date-field").mask("99/99/99");
         });
     </script>
 </asp:Content>
@@ -25,7 +25,13 @@
             <asp:TextBox ID="TxtOrderDate" runat="server" CssClass="form-control date-field"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtOrderDate"
                 CssClass="text-danger" ErrorMessage="The Order Date field is required." EnableClientScript="true"
-                ValidationGroup="vgOrder" />
+                ValidationGroup="vgOrder" Display="Dynamic" />
+            <asp:CompareValidator ID="CVOrderDateFuture" runat="server" Type="Date" ControlToValidate="TxtOrderDate" ValidationGroup="vgOrder" CssClass="text-danger" 
+                EnableClientScript="true" ErrorMessage="Date cannot be in the future!" ValueToCompare="01/01/18" Display="Dynamic">
+            </asp:CompareValidator>
+            <asp:CompareValidator ID="CVOrderDateTypeCheck" runat="server" Type="Date" Operator="DataTypeCheck" ControlToValidate="TxtOrderDate" CssClass="text-danger" 
+                ValidationGroup="vgOrder" ErrorMessage="Not a valid date!" EnableClientScript="true" Display="Dynamic">
+            </asp:CompareValidator>
         </div>
         <div class="col-md-3">
             <label for="DDLRole">Customer</label>
@@ -93,6 +99,8 @@
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtQuantity"
                 CssClass="text-danger" ErrorMessage="The Quantity field is required." EnableClientScript="true"
                 ValidationGroup="vgOrderLine" />
+            <asp:RangeValidator runat="server" CssClass="text-danger" ControlToValidate="TxtQuantity" ErrorMessage="Quantity must be a positive number!" 
+                EnableClientScript="true" ValidationGroup="vgOrderLine" MaximumValue="999" MinimumValue="1" Display="Dynamic"></asp:RangeValidator>
         </div>
         <div class="col-md-3">
             <br />

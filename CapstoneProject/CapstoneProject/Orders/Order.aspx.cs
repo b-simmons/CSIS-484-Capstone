@@ -36,9 +36,12 @@ namespace CapstoneProject.Orders
 
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            //Check if edit
             if (!String.IsNullOrWhiteSpace(Request.QueryString["orderid"]))
                 isEdit = true;
+
+            //Set validator
+            CVOrderDateFuture.ValueToCompare = DateTime.Now.ToString("MM/dd/yy");
 
             if (!IsPostBack)
             {

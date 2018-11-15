@@ -49,6 +49,24 @@ namespace CapstoneProject.Orders {
         protected global::System.Web.UI.WebControls.TextBox TxtOrderDate;
         
         /// <summary>
+        /// CVOrderDateFuture control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CVOrderDateFuture;
+        
+        /// <summary>
+        /// CVOrderDateTypeCheck control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CompareValidator CVOrderDateTypeCheck;
+        
+        /// <summary>
         /// DDLCustomer control.
         /// </summary>
         /// <remarks>
