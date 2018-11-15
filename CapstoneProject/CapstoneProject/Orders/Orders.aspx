@@ -1,4 +1,5 @@
 ﻿<%@ Page Title="Manage Orders" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Orders.aspx.cs" Inherits="CapstoneProject.Orders.Orders" %>
+
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
         function pageLoad() {
@@ -45,6 +46,15 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:LinkButton ID="BtnEditOrder" runat="server" CssClass="btn btn-default" OnClick="BtnEditOrder_Click" Text="Edit" />
+                    <asp:LoginView ID="LGVNavbar" runat="server" ViewStateMode="Disabled">
+                        <RoleGroups>
+                            <asp:RoleGroup Roles="Admin">
+                                <ContentTemplate>
+                                    <asp:LinkButton ID="BtnDeleteOrder" runat="server" CssClass="btn btn-danger" OnClick="BtnDeleteOrder_Click" Text="Delete" />
+                                </ContentTemplate>
+                            </asp:RoleGroup>
+                        </RoleGroups>
+                    </asp:LoginView>
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

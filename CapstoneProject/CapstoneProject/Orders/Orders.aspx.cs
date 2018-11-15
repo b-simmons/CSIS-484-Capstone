@@ -36,6 +36,7 @@ namespace CapstoneProject.Orders
                                   };
             GrOrders.DataBind();
 
+            //Show a success message if the query string indicates it
             if(!String.IsNullOrWhiteSpace(Request.QueryString["successmessage"]) && !IsPostBack)
             {
                 int messageType = Convert.ToInt32(Request.QueryString["successmessage"]);
@@ -74,6 +75,61 @@ namespace CapstoneProject.Orders
 
             //Redirect the user
             Response.Redirect("/Orders/Order.aspx?orderid=" + orderID);
+        }
+
+        /// <summary>
+        /// This method handles the click event for the BtnDeleteOrder button
+        /// that is inside the GrOrders gridview.
+        /// </summary>
+        /// <param name="sender">The BtnDeleteOrder button</param>
+        /// <param name="e">The click event</param>
+        protected void BtnDeleteOrder_Click(object sender, EventArgs e)
+        {
+            CapstoneEntities context = new CapstoneEntities();
+
+            //Get the Gridview row
+            GridViewRow row = (GridViewRow)((LinkButton)sender).NamingContainer;
+
+            //Get the order ID
+            int orderID = Convert.ToInt32(GrOrders.DataKeys[row.RowIndex].Values["OrderID"]);
+
+            //Get the order to delete
+            Models.Order orderToDelete = context.Orders.Where(o => o.OrderID == orderID).FirstOrDefault();
+
+            //Delete any order lines and shipments
+            foreach(Models.OrderLine line in orderToDelete.OrderLines)
+            {
+                context.OrderLines.Remove(line);
+            }
+            foreach(Models.Shipment shipment in orderToDelete.Shipments)
+            {
+                context.Shipments.Remove(shipment);
+            }
+            context.SaveChanges();
+
+            //Remove the order
+            context.Orders.Remove(orderToDelete);
+            context.SaveChanges();
+
+            //Refresh the gridview
+            List<Models.Order> allOrders = context.Orders.ToList();
+            GrOrders.DataSource = from order in allOrders
+                                  select new
+                                  {
+                                      order.OrderID,
+                                      order.OrderDate,
+                                      order.OrderTotal,
+                                      order.Customer.CustomerID,
+                                      order.Customer.BusinessName,
+                                      order.Location.LocationID,
+                                      order.Location.Address,
+                                      Shipped = (order.Shipments.Any(s => s.OrderID == order.OrderID) ? "Yes" : "No")
+                                  };
+            GrOrders.DataBind();
+
+            //Show success message
+            DivSuccessMessage.Visible = true;
+            LblSuccessMessage.Text = "Order successfully deleted!";
         }
 
         /// <summary>
