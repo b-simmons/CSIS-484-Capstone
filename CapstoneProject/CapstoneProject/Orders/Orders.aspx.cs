@@ -166,12 +166,12 @@ namespace CapstoneProject.Orders
             else if (e.Row.RowType == DataControlRowType.DataRow)
             {
                 //Hide the delete button if not admin
-                LinkButton button = (LinkButton)e.Row.FindControl("BtnDeleteOrder");
+                LinkButton deleteButton = (LinkButton)e.Row.FindControl("BtnDeleteOrder");
 
                 string role = manager.GetRoles(user.Id).FirstOrDefault();
 
                 if (role != "Admin")
-                    button.Visible = false;
+                    deleteButton.Visible = false;
             }
         }
     }

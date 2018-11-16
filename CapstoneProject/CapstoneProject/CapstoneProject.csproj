@@ -186,6 +186,7 @@
     <Content Include="Models\CapstoneDB.edmx.diagram">
       <DependentUpon>CapstoneDB.edmx</DependentUpon>
     </Content>
+    <Content Include="Orders\ShipOrder.aspx" />
     <Content Include="Orders\Web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Models\CapstoneDB.Context.tt">
@@ -335,6 +336,13 @@
     </Compile>
     <Compile Include="Orders\Orders.aspx.designer.cs">
       <DependentUpon>Orders.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Orders\ShipOrder.aspx.cs">
+      <DependentUpon>ShipOrder.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Orders\ShipOrder.aspx.designer.cs">
+      <DependentUpon>ShipOrder.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Site.Master.cs">

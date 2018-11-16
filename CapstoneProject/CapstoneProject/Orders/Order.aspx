@@ -26,15 +26,15 @@
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtOrderDate"
                 CssClass="text-danger" ErrorMessage="The Order Date field is required." EnableClientScript="true"
                 ValidationGroup="vgOrder" Display="Dynamic" />
-            <asp:CompareValidator ID="CVOrderDateFuture" runat="server" Type="Date" ControlToValidate="TxtOrderDate" ValidationGroup="vgOrder" CssClass="text-danger" 
-                EnableClientScript="true" ErrorMessage="Date cannot be in the future!" ValueToCompare="01/01/18" Display="Dynamic">
+            <asp:CompareValidator ID="CVOrderDateFuture" runat="server" Type="Date" ControlToValidate="TxtOrderDate" Operator="LessThanEqual" ValidationGroup="vgOrder" CssClass="text-danger" 
+                EnableClientScript="true" ErrorMessage="Date cannot be in the future!" Display="Dynamic">
             </asp:CompareValidator>
             <asp:CompareValidator ID="CVOrderDateTypeCheck" runat="server" Type="Date" Operator="DataTypeCheck" ControlToValidate="TxtOrderDate" CssClass="text-danger" 
                 ValidationGroup="vgOrder" ErrorMessage="Not a valid date!" EnableClientScript="true" Display="Dynamic">
             </asp:CompareValidator>
         </div>
         <div class="col-md-3">
-            <label for="DDLRole">Customer</label>
+            <label for="DDLCustomer">Customer</label>
             <asp:DropDownList ID="DDLCustomer" runat="server" AppendDataBoundItems="true" CssClass="form-control" DataTextField="BusinessName" DataValueField="CustomerID"
                 OnSelectedIndexChanged="DDLCustomer_SelectedIndexChanged" AutoPostBack="true">
                 <asp:ListItem Selected="True" Text="--Select--" Value="-1"></asp:ListItem>

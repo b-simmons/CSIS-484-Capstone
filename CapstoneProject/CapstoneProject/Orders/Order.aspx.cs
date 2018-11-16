@@ -41,7 +41,7 @@ namespace CapstoneProject.Orders
                 isEdit = true;
 
             //Set validator
-            CVOrderDateFuture.ValueToCompare = DateTime.Now.ToString("MM/dd/yy");
+            CVOrderDateFuture.ValueToCompare = DateTime.Now.ToString("MM/dd/yyyy");
 
             if (!IsPostBack)
             {

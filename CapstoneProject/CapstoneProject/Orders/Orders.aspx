@@ -3,7 +3,7 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
         function pageLoad() {
-            if (!jQuery.fn.DataTable.isDataTable("[id$='GrOrders']") && jQuery("[id$='GrOrders'] tr").length > 2) {
+            if (jQuery("[id$='GrOrders'] tr").length > 2) {
                 jQuery("[id$='GrOrders'").DataTable();
             }
         }
