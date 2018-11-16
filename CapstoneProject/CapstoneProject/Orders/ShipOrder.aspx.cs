@@ -24,19 +24,7 @@ namespace CapstoneProject.Orders
             List<Models.Order> allOrders = context.Orders.ToList();
 
             //Populate the gridview
-            GrOrders.DataSource = from order in allOrders
-                                  select new
-                                  {
-                                      order.OrderID,
-                                      order.OrderDate,
-                                      order.OrderTotal,
-                                      order.Customer.CustomerID,
-                                      order.Customer.BusinessName,
-                                      order.Location.LocationID,
-                                      order.Location.Address,
-                                      Shipped = (order.Shipments.Any(s => s.OrderID == order.OrderID) ? "Yes" : "No")
-                                  };
-            GrOrders.DataBind();
+            PopulateOrdersGrid();
         }
 
         /// <summary>
@@ -95,20 +83,7 @@ namespace CapstoneProject.Orders
             DivDetails.Visible = false;
 
             //Refresh the orders gridview
-            List<Models.Order> allOrders = context.Orders.ToList();
-            GrOrders.DataSource = from order in allOrders
-                                  select new
-                                  {
-                                      order.OrderID,
-                                      order.OrderDate,
-                                      order.OrderTotal,
-                                      order.Customer.CustomerID,
-                                      order.Customer.BusinessName,
-                                      order.Location.LocationID,
-                                      order.Location.Address,
-                                      Shipped = (order.Shipments.Any(s => s.OrderID == order.OrderID) ? "Yes" : "No")
-                                  };
-            GrOrders.DataBind();
+            PopulateOrdersGrid();
         }
 
         /// <summary>
@@ -192,6 +167,12 @@ namespace CapstoneProject.Orders
                 TxtShipmentDate.Text = shipment.ShipmentDate.ToString("MM/dd/yy");
                 TxtShippingService.Text = shipment.ShippingServiceName;
                 TxtTrackingNum.Text = shipment.TrackingNumber;
+
+                BtnRemoveShipment.Visible = true;
+            }
+            else
+            {
+                BtnRemoveShipment.Visible = false;
             }
         }
 
@@ -210,6 +191,58 @@ namespace CapstoneProject.Orders
             TxtShippingService.Text = "";
             TxtTrackingNum.Text = "";
             HFOrderID.Value = "0";
+        }
+
+        /// <summary>
+        /// This method handles the click event for the BtnRemoveShipment button
+        /// </summary>
+        /// <param name="sender">The BtnRemoveShipment button</param>
+        /// <param name="e">The click event</param>
+        protected void BtnRemoveShipment_Click(object sender, EventArgs e)
+        {
+            //Get the order object
+            CapstoneEntities context = new CapstoneEntities();
+            int orderID = Convert.ToInt32(HFOrderID.Value);
+            Models.Order shippedOrder = context.Orders.Where(o => o.OrderID == orderID).FirstOrDefault();
+
+            //Remove the shipment
+            Models.Shipment shipment = shippedOrder.Shipments.FirstOrDefault();
+            context.Shipments.Remove(shipment);
+            context.SaveChanges();
+
+            //Reset the inputs
+            ClearDetails();
+            DivDetails.Visible = false;
+
+            //Show success message
+            LblSuccessMessage.Text = "Shipment successfully removed!";
+            DivSuccessMessage.Visible = true;
+
+            //Refresh the orders gridview
+            PopulateOrdersGrid();
+        }
+
+        /// <summary>
+        /// This method fills the orders gridview
+        /// </summary>
+        private void PopulateOrdersGrid()
+        {
+            //Populate the orders gridview
+            CapstoneEntities context = new CapstoneEntities();
+            List<Models.Order> allOrders = context.Orders.ToList();
+            GrOrders.DataSource = from order in allOrders
+                                  select new
+                                  {
+                                      order.OrderID,
+                                      order.OrderDate,
+                                      order.OrderTotal,
+                                      order.Customer.CustomerID,
+                                      order.Customer.BusinessName,
+                                      order.Location.LocationID,
+                                      order.Location.Address,
+                                      Shipped = (order.Shipments.Any(s => s.OrderID == order.OrderID) ? "Yes" : "No")
+                                  };
+            GrOrders.DataBind();
         }
     }
 }

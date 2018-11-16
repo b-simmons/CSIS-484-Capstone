@@ -134,9 +134,14 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-md-4">
                         <asp:Button ID="BtnCancel" runat="server" class="btn btn-default" OnClick="BtnCancel_Click" Text="Cancel"></asp:Button>
                         <asp:Button ID="BtnSubmit" runat="server" CssClass="btn btn-primary" OnClick="BtnSubmit_Click" Text="Submit" ValidationGroup="vgOrder" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-4">
+                        <asp:Button ID="BtnRemoveShipment" runat="server" CssClass="btn btn-danger" OnClick="BtnRemoveShipment_Click" Text="Remove Shipment Details" />
                     </div>
                 </div>
             </div>
