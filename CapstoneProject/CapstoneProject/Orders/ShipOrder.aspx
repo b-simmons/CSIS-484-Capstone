@@ -58,11 +58,11 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-md-3">
-                        <label for="LblOrderDate">Order Date</label>
+                        <label for="LblOrderDate">Order Date:</label>
                         <asp:Label ID="LblOrderDate" runat="server" Text=""></asp:Label>
                     </div>
                     <div class="col-md-3">
-                        <label for="LblCustomer">Customer</label>
+                        <label for="LblCustomer">Customer:</label>
                         <asp:Label ID="LblCustomer" runat="server" Text=""></asp:Label>
                     </div>
                     <div class="col-md-3">

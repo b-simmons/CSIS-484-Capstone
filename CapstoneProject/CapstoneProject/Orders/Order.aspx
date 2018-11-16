@@ -26,10 +26,10 @@
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtOrderDate"
                 CssClass="text-danger" ErrorMessage="The Order Date field is required." EnableClientScript="true"
                 ValidationGroup="vgOrder" Display="Dynamic" />
-            <asp:CompareValidator ID="CVOrderDateFuture" runat="server" Type="Date" ControlToValidate="TxtOrderDate" Operator="LessThanEqual" ValidationGroup="vgOrder" CssClass="text-danger" 
+            <asp:CompareValidator ID="CVOrderDateFuture" runat="server" Type="Date" ControlToValidate="TxtOrderDate" Operator="LessThanEqual" ValidationGroup="vgOrder" CssClass="text-danger"
                 EnableClientScript="true" ErrorMessage="Date cannot be in the future!" Display="Dynamic">
             </asp:CompareValidator>
-            <asp:CompareValidator ID="CVOrderDateTypeCheck" runat="server" Type="Date" Operator="DataTypeCheck" ControlToValidate="TxtOrderDate" CssClass="text-danger" 
+            <asp:CompareValidator ID="CVOrderDateTypeCheck" runat="server" Type="Date" Operator="DataTypeCheck" ControlToValidate="TxtOrderDate" CssClass="text-danger"
                 ValidationGroup="vgOrder" ErrorMessage="Not a valid date!" EnableClientScript="true" Display="Dynamic">
             </asp:CompareValidator>
         </div>
@@ -51,6 +51,23 @@
             <asp:RequiredFieldValidator runat="server" ControlToValidate="DDLLocation"
                 CssClass="text-danger" ErrorMessage="A Location must be selected." EnableClientScript="true"
                 ValidationGroup="vgOrder" InitialValue="-1" />
+        </div>
+    </div>
+    <div id="DivShipmentDetails" runat="server" visible="false">
+        <h3>Shipment Details</h3>
+        <div class="row">
+            <div class="col-md-3">
+                <label for="LblShipmentDate">Shipment Date:</label>
+                <asp:Label ID="LblShipmentDate" runat="server" Text=""></asp:Label>
+            </div>
+            <div class="col-md-3">
+                <label for="LblShippingService">Shipping Service:</label>
+                <asp:Label ID="LblShippingService" runat="server" Text=""></asp:Label>
+            </div>
+            <div class="col-md-3">
+                <label for="LblTrackingNum">Tracking Number:</label>
+                <asp:Label ID="LblTrackingNum" runat="server" Text=""></asp:Label>
+            </div>
         </div>
     </div>
     <div class="row">
@@ -99,7 +116,7 @@
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtQuantity"
                 CssClass="text-danger" ErrorMessage="The Quantity field is required." EnableClientScript="true"
                 ValidationGroup="vgOrderLine" />
-            <asp:RangeValidator runat="server" CssClass="text-danger" ControlToValidate="TxtQuantity" ErrorMessage="Quantity must be a positive number!" 
+            <asp:RangeValidator runat="server" CssClass="text-danger" ControlToValidate="TxtQuantity" ErrorMessage="Quantity must be a positive number!"
                 EnableClientScript="true" ValidationGroup="vgOrderLine" MaximumValue="999" MinimumValue="1" Display="Dynamic"></asp:RangeValidator>
         </div>
         <div class="col-md-3">

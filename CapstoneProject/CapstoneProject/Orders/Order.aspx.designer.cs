@@ -85,6 +85,42 @@ namespace CapstoneProject.Orders {
         protected global::System.Web.UI.WebControls.DropDownList DDLLocation;
         
         /// <summary>
+        /// DivShipmentDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl DivShipmentDetails;
+        
+        /// <summary>
+        /// LblShipmentDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblShipmentDate;
+        
+        /// <summary>
+        /// LblShippingService control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblShippingService;
+        
+        /// <summary>
+        /// LblTrackingNum control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label LblTrackingNum;
+        
+        /// <summary>
         /// GrOrderContents control.
         /// </summary>
         /// <remarks>

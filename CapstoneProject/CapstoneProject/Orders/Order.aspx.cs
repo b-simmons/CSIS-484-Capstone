@@ -38,7 +38,14 @@ namespace CapstoneProject.Orders
         {
             //Check if edit
             if (!String.IsNullOrWhiteSpace(Request.QueryString["orderid"]))
+            {
                 isEdit = true;
+                LblPageTitle.Text = "Edit Order";
+            }
+            else
+            {
+                LblPageTitle.Text = "New Order";
+            }
 
             //Set validator
             CVOrderDateFuture.ValueToCompare = DateTime.Now.ToString("MM/dd/yyyy");
@@ -107,6 +114,20 @@ namespace CapstoneProject.Orders
                         row["Quantity"] = line.Quantity;
                         row["LineTotal"] = line.Product.Price * line.Quantity;
                         orderContents.Rows.Add(row);
+                    }
+
+                    //If order shipped, lock controls and show shipping info
+                    if(order.Shipments.Count > 0)
+                    {
+                        //Get shipping info
+                        Models.Shipment shipment = order.Shipments.FirstOrDefault();
+                        LblShipmentDate.Text = shipment.ShipmentDate.ToString("MM/dd/yy");
+                        LblTrackingNum.Text = shipment.TrackingNumber;
+                        LblShippingService.Text = shipment.ShippingServiceName;
+                        DivShipmentDetails.Visible = true;
+
+                        //Lock the controls
+                        LockControls();
                     }
                 }
             }
@@ -323,6 +344,21 @@ namespace CapstoneProject.Orders
                 DDLLocation.SelectedIndex = 0;
                 DDLLocation.Enabled = true;
             }
+        }
+
+        /// <summary>
+        /// This methods locks all the controls on the page
+        /// </summary>
+        private void LockControls()
+        {
+            TxtOrderDate.Enabled = false;
+            TxtQuantity.Enabled = false;
+            DDLCustomer.Enabled = false;
+            DDLLocation.Enabled = false;
+            DDLProduct.Enabled = false;
+            BtnSubmit.Visible = false;
+            BtnAddToOrder.Visible = false;
+            LnkCancel.Text = "Close";
         }
     }
 }
