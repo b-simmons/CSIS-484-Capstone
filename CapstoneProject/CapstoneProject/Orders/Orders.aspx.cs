@@ -1,7 +1,10 @@
 ﻿using CapstoneProject.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
@@ -15,8 +18,16 @@ namespace CapstoneProject.Orders
      */
     public partial class Orders : System.Web.UI.Page
     {
+
+        ApplicationUserManager manager;
+        ApplicationUser user;
+
         protected void Page_Load(object sender, EventArgs e)
         {
+            //Get the user
+            manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            user = manager.FindByName(User.Identity.Name);
+
             //Get all orders
             CapstoneEntities context = new CapstoneEntities();
             List<Models.Order> allOrders = context.Orders.ToList();
@@ -93,15 +104,22 @@ namespace CapstoneProject.Orders
             //Get the order ID
             int orderID = Convert.ToInt32(GrOrders.DataKeys[row.RowIndex].Values["OrderID"]);
 
-            //Get the order to delete
+            //Get the order to delete and the related objects
             Models.Order orderToDelete = context.Orders.Where(o => o.OrderID == orderID).FirstOrDefault();
+            List<OrderLine> orderLines = orderToDelete.OrderLines.ToList();
+            List<Shipment> shipments = orderToDelete.Shipments.ToList();
 
             //Delete any order lines and shipments
-            foreach(Models.OrderLine line in orderToDelete.OrderLines)
+            foreach (Models.OrderLine line in orderLines)
             {
+                //Edit the Product object
+                Models.Product product = context.Products.Where(p => p.ProductID == line.ProductID).FirstOrDefault();
+                product.QuantityInStock += line.Quantity;
+
+                //Remove the order line
                 context.OrderLines.Remove(line);
             }
-            foreach(Models.Shipment shipment in orderToDelete.Shipments)
+            foreach(Models.Shipment shipment in shipments)
             {
                 context.Shipments.Remove(shipment);
             }
@@ -142,7 +160,19 @@ namespace CapstoneProject.Orders
         {
             //Set the header
             if (e.Row.RowType == DataControlRowType.Header)
+            {
                 e.Row.TableSection = TableRowSection.TableHeader;
+            }
+            else if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                //Hide the delete button if not admin
+                LinkButton button = (LinkButton)e.Row.FindControl("BtnDeleteOrder");
+
+                string role = manager.GetRoles(user.Id).FirstOrDefault();
+
+                if (role != "Admin")
+                    button.Visible = false;
+            }
         }
     }
 }

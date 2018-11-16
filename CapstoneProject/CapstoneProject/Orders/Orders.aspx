@@ -15,7 +15,7 @@
     <div id="DivSuccessMessage" class="alert alert-success" runat="server" visible="false">
         <asp:Label ID="LblSuccessMessage" runat="server" Text=""></asp:Label>
     </div>
-    <asp:GridView ID="GrOrders" runat="server" CssClass="table table-striped" AllowPaging="false" UseAccessibleHeader="true" AutoGenerateColumns="false"
+    <asp:GridView ID="GrOrders" runat="server" CssClass="table table-striped dt-table-responsive" AllowPaging="false" UseAccessibleHeader="true" AutoGenerateColumns="false"
         OnRowDataBound="GrOrders_RowDataBound" DataKeyNames="OrderID, CustomerID, LocationID">
         <Columns>
             <asp:TemplateField HeaderText="Order Date">
@@ -46,15 +46,7 @@
             <asp:TemplateField>
                 <ItemTemplate>
                     <asp:LinkButton ID="BtnEditOrder" runat="server" CssClass="btn btn-default" OnClick="BtnEditOrder_Click" Text="Edit" />
-                    <asp:LoginView ID="LGVNavbar" runat="server" ViewStateMode="Disabled">
-                        <RoleGroups>
-                            <asp:RoleGroup Roles="Admin">
-                                <ContentTemplate>
-                                    <asp:LinkButton ID="BtnDeleteOrder" runat="server" CssClass="btn btn-danger" OnClick="BtnDeleteOrder_Click" Text="Delete" />
-                                </ContentTemplate>
-                            </asp:RoleGroup>
-                        </RoleGroups>
-                    </asp:LoginView>
+                    <asp:LinkButton ID="BtnDeleteOrder" runat="server" CssClass="btn btn-danger" OnClick="BtnDeleteOrder_Click" Text="Delete" />
                 </ItemTemplate>
             </asp:TemplateField>
         </Columns>

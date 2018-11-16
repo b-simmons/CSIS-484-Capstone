@@ -248,7 +248,12 @@ namespace CapstoneProject.Orders
             context.SaveChanges();
 
             //Redirect the user
-            Response.Redirect("/Orders/Orders.aspx?successmessage=1");
+            if(isEdit)
+                //Edit success message
+                Response.Redirect("/Orders/Orders.aspx?successmessage=2");
+            else
+                //Add success message
+                Response.Redirect("/Orders/Orders.aspx?successmessage=1");
         }
 
         /// <summary>
@@ -271,6 +276,13 @@ namespace CapstoneProject.Orders
             if(orderLineID != 0)
             {
                 Models.OrderLine orderLine = context.OrderLines.Where(l => l.OrderLineID == orderLineID).FirstOrDefault();
+
+                //Edit the Product object
+                Models.Product product = context.Products.Where(p => p.ProductID == orderLine.ProductID).FirstOrDefault();
+                product.QuantityInStock += orderLine.Quantity;
+                context.SaveChanges();
+
+                //Remove the order line object
                 context.OrderLines.Remove(orderLine);
                 context.SaveChanges();
             }

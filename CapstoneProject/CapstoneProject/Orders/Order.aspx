@@ -56,7 +56,7 @@
     <div class="row">
         <div class="col-sm-12">
             <label>Order Contents</label>
-            <asp:GridView ID="GrOrderContents" runat="server" CssClass="table table-striped" AllowPaging="false" UseAccessibleHeader="true" AutoGenerateColumns="false"
+            <asp:GridView ID="GrOrderContents" runat="server" CssClass="table table-striped dt-table-responsive" AllowPaging="false" UseAccessibleHeader="true" AutoGenerateColumns="false"
                 DataKeyNames="ProductID, Quantity, OrderLineID" ShowHeaderWhenEmpty="true" EmptyDataText="No contents">
                 <Columns>
                     <asp:TemplateField HeaderText="Product">
