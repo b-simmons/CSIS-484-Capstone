@@ -107,7 +107,7 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label for="TxtShipmentDate">Shipment Date</label>
-                        <asp:TextBox ID="TxtShipmentDate" runat="server" CssClass="form-control date-field"></asp:TextBox>
+                        <asp:TextBox ID="TxtShipmentDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtShipmentDate"
                             CssClass="text-danger" ErrorMessage="The Shipment Date field is required." EnableClientScript="true"
                             ValidationGroup="vgShipment" Display="Dynamic" />
