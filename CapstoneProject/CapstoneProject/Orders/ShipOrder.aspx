@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ShipOrder.aspx.cs" Inherits="CapstoneProject.Orders.ShipOrder" %>
+﻿<%@ Page Title="Ship Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ShipOrder.aspx.cs" Inherits="CapstoneProject.Orders.ShipOrder" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">

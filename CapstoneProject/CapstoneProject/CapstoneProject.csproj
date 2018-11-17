@@ -188,6 +188,7 @@
     </Content>
     <Content Include="Orders\ShipOrder.aspx" />
     <Content Include="Orders\Web.config" />
+    <Content Include="Products\Product.aspx" />
     <Content Include="Products\Web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Models\CapstoneDB.Context.tt">
@@ -345,6 +346,13 @@
     </Compile>
     <Compile Include="Orders\ShipOrder.aspx.designer.cs">
       <DependentUpon>ShipOrder.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Products\Product.aspx.cs">
+      <DependentUpon>Product.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Products\Product.aspx.designer.cs">
+      <DependentUpon>Product.aspx</DependentUpon>
     </Compile>
     <Compile Include="Products\Products.aspx.cs">
       <DependentUpon>Products.aspx</DependentUpon>

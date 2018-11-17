@@ -1,6 +1,14 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="CapstoneProject.Orders.Order" %>
+﻿<%@ Page Title="Order" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Order.aspx.cs" Inherits="CapstoneProject.Orders.Order" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <script type="text/javascript">
+        //Apply input masks
+        $j = jQuery.noConflict();
+        $j(document).ready(function(){
+            $j(".quantity").inputmask("9[999]");
+            $j(".date").inputmask("99/99/99");
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="text-center">
@@ -16,7 +24,7 @@
     <div class="row">
         <div class="col-md-3">
             <label for="TxtOrderDate">Order Date</label>
-            <asp:TextBox ID="TxtOrderDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+            <asp:TextBox ID="TxtOrderDate" runat="server" CssClass="form-control date"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtOrderDate"
                 CssClass="text-danger" ErrorMessage="The Order Date field is required." EnableClientScript="true"
                 ValidationGroup="vgOrder" Display="Dynamic" />
@@ -105,8 +113,8 @@
                 ValidationGroup="vgOrderLine" InitialValue="-1" />
         </div>
         <div class="col-md-3">
-            <label for="TxtQuantity">Quantity</label>
-            <asp:TextBox ID="TxtQuantity" runat="server" CssClass="form-control number-only-2"></asp:TextBox>
+            <label for="TxtQuantity">Quantity</label> 
+            <asp:TextBox ID="TxtQuantity" runat="server" CssClass="form-control quantity"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtQuantity"
                 CssClass="text-danger" ErrorMessage="The Quantity field is required." EnableClientScript="true"
                 ValidationGroup="vgOrderLine" />
