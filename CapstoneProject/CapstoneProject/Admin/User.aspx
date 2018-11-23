@@ -1,6 +1,13 @@
 ﻿<%@ Page Title="User" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="User.aspx.cs" Inherits="CapstoneProject.Admin.User" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
+    <script>
+        //Apply input masks
+        $j = jQuery.noConflict();
+        $j(document).ready(function(){
+            $j(".phone").inputmask("999-999-9999");
+        });
+    </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
     <div class="text-center">
@@ -41,7 +48,7 @@
     <div class="row">
         <div class="col-md-3">
             <label for="TxtPhone">Phone Number</label>
-            <asp:TextBox ID="TxtPhone" runat="server" CssClass="form-control" TextMode="Phone"></asp:TextBox>
+            <asp:TextBox ID="TxtPhone" runat="server" CssClass="form-control phone"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtPhone"
                 CssClass="text-danger" ErrorMessage="The Phone Number field is required." EnableClientScript="true"
                 ValidationGroup="vgUser" />

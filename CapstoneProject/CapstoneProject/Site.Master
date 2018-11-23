@@ -81,7 +81,7 @@
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Orders/Orders.aspx">Manage Orders</a></li>
                                                 <li><a href="/Orders/Order.aspx">New Order</a></li>
-                                                <li><a href="/Orders/ShipOrder.aspx">Manage Shipments</a></li>
+                                                <li><a href="/Orders/ShipOrder.aspx">Shipments</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">

@@ -2,10 +2,14 @@
 
 <asp:Content ID="Content1" ContentPlaceHolderID="Head" runat="server">
     <script type="text/javascript">
+        $j = jQuery.noConflict();
         function pageLoad() {
-            if (jQuery("[id$='GrOrders'] tr").length > 2) {
-                jQuery("[id$='GrOrders'").DataTable();
+            //Create datatable
+            if ($j("[id$='GrOrders'] tr").length > 2) {
+                $j("[id$='GrOrders'").DataTable();
             }
+            //Apply input masks
+            $j(".date-field").inputmask("99/99/99");
         }
     </script>
 </asp:Content>
@@ -107,27 +111,27 @@
                 <div class="row">
                     <div class="col-md-3">
                         <label for="TxtShipmentDate">Shipment Date</label>
-                        <asp:TextBox ID="TxtShipmentDate" runat="server" CssClass="form-control" TextMode="Date"></asp:TextBox>
+                        <asp:TextBox ID="TxtShipmentDate" runat="server" CssClass="form-control date-field"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtShipmentDate"
                             CssClass="text-danger" ErrorMessage="The Shipment Date field is required." EnableClientScript="true"
                             ValidationGroup="vgShipment" Display="Dynamic" />
-                        <asp:CompareValidator ID="CVOrderDateFuture" runat="server" Type="Date" ControlToValidate="TxtShipmentDate" ValidationGroup="vgShipment" CssClass="text-danger"
-                            EnableClientScript="true" ErrorMessage="Date cannot be in the future!" ValueToCompare="01/01/18" Display="Dynamic">
+                        <asp:CompareValidator ID="CVShipmentDateFuture" runat="server" Type="Date" ControlToValidate="TxtShipmentDate" ValidationGroup="vgShipment" CssClass="text-danger"
+                            EnableClientScript="false" ErrorMessage="Date cannot be in the future!" Display="Dynamic">
                         </asp:CompareValidator>
-                        <asp:CompareValidator ID="CVOrderDateTypeCheck" runat="server" Type="Date" Operator="DataTypeCheck" ControlToValidate="TxtShipmentDate" CssClass="text-danger"
+                        <asp:CompareValidator ID="CVShipmentDateTypeCheck" runat="server" Type="Date" Operator="DataTypeCheck" ControlToValidate="TxtShipmentDate" CssClass="text-danger"
                             ValidationGroup="vgShipment" ErrorMessage="Not a valid date!" EnableClientScript="true" Display="Dynamic">
                         </asp:CompareValidator>
                     </div>
                     <div class="col-md-3">
                         <label for="TxtShippingService">Shipping Service</label>
-                        <asp:TextBox ID="TxtShippingService" runat="server" CssClass="form-control date-field" MaxLength="50"></asp:TextBox>
+                        <asp:TextBox ID="TxtShippingService" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtShippingService"
                             CssClass="text-danger" ErrorMessage="The Shipping Service field is required." EnableClientScript="true"
                             ValidationGroup="vgShipment" Display="Dynamic" />
                     </div>
                     <div class="col-md-3">
                         <label for="TxtTrackingNum">Tracking Number</label>
-                        <asp:TextBox ID="TxtTrackingNum" runat="server" CssClass="form-control date-field" MaxLength="50"></asp:TextBox>
+                        <asp:TextBox ID="TxtTrackingNum" runat="server" CssClass="form-control" MaxLength="50"></asp:TextBox>
                         <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtTrackingNum"
                             CssClass="text-danger" ErrorMessage="The Tracking Number field is required." EnableClientScript="true"
                             ValidationGroup="vgShipment" Display="Dynamic" />
@@ -136,7 +140,7 @@
                 <div class="row">
                     <div class="col-md-4">
                         <asp:Button ID="BtnCancel" runat="server" class="btn btn-default" OnClick="BtnCancel_Click" Text="Cancel"></asp:Button>
-                        <asp:Button ID="BtnSubmit" runat="server" CssClass="btn btn-primary" OnClick="BtnSubmit_Click" Text="Submit" ValidationGroup="vgOrder" />
+                        <asp:Button ID="BtnSubmit" runat="server" CssClass="btn btn-primary" OnClick="BtnSubmit_Click" Text="Submit" ValidationGroup="vgShipment" />
                     </div>
                 </div>
                 <div class="row">

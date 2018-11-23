@@ -25,6 +25,9 @@ namespace CapstoneProject.Orders
 
             //Populate the gridview
             PopulateOrdersGrid();
+
+            //Set validator
+            CVShipmentDateFuture.ValueToCompare = DateTime.Now.ToString("MM/dd/yyyy");
         }
 
         /// <summary>
