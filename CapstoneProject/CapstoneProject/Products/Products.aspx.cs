@@ -91,23 +91,10 @@ namespace CapstoneProject.Products
             //Get the product ID
             int productID = Convert.ToInt32(GrProducts.DataKeys[row.RowIndex].Values["ProductID"]);
 
-            //Get the product to delete and the related objects
+            //Get the product to delete
             Models.Product productToDelete = context.Products.Where(o => o.ProductID == productID).FirstOrDefault();
-            List<OrderLine> productLines = productToDelete.OrderLines.ToList();
 
-            //Delete any product lines and shipments
-            foreach (Models.OrderLine line in productLines)
-            {
-                //Edit the Product object
-                Models.Product product = context.Products.Where(p => p.ProductID == line.ProductID).FirstOrDefault();
-                product.QuantityInStock += line.Quantity;
-
-                //Remove the product line
-                context.OrderLines.Remove(line);
-            }
-            context.SaveChanges();
-
-            //Remove the product
+            //Delete the product
             context.Products.Remove(productToDelete);
             context.SaveChanges();
 
@@ -129,6 +116,8 @@ namespace CapstoneProject.Products
         /// <param name="e">The RowDataBound event</param>
         protected void GrProducts_RowDataBound(object sender, GridViewRowEventArgs e)
         {
+            CapstoneEntities context = new CapstoneEntities();
+
             //Set the header
             if (e.Row.RowType == DataControlRowType.Header)
             {
@@ -146,6 +135,19 @@ namespace CapstoneProject.Products
                 {
                     deleteButton.Visible = false;
                     editButton.Visible = false;
+                }
+
+                //Get the product for this row
+                int productID = Convert.ToInt32(GrProducts.DataKeys[e.Row.RowIndex].Values["ProductID"]);
+                Models.Product product = context.Products.Where(o => o.ProductID == productID).FirstOrDefault();
+
+                //Don't allow deletion or editing if the product is already on an order
+                if (product.OrderLines.Count > 0)
+                {
+                    editButton.Visible = false;
+                    deleteButton.Visible = false;
+                    Label orderLabel = (Label)e.Row.FindControl("LblOnOrder");
+                    orderLabel.Visible = true;
                 }
             }
         }

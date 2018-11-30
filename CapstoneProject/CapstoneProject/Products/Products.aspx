@@ -39,6 +39,7 @@
             </asp:TemplateField>
             <asp:TemplateField>
                 <ItemTemplate>
+                    <asp:Label ID="LblOnOrder" runat="server" Visible="false" Text="Cannot edit or delete due to product existing on an order"></asp:Label>
                     <asp:LinkButton ID="BtnEditProduct" runat="server" CssClass="btn btn-default" OnClick="BtnEditProduct_Click" Text="Edit" />
                     <asp:LinkButton ID="BtnDeleteProduct" runat="server" CssClass="btn btn-danger" OnClick="BtnDeleteProduct_Click" Text="Delete" />
                 </ItemTemplate>
