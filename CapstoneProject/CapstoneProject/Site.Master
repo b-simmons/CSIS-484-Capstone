@@ -62,8 +62,8 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers
                         <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Manage Customers</a></li>
-                                                <li><a href="#">New Customer</a></li>
+                                                <li><a href="/Customers/Customers.aspx">Manage Customers</a></li>
+                                                <li><a href="/Customers/Customer.aspx">New Customer</a></li>
                                                 <li><a href="#">New Shipping Location</a></li>
                                             </ul>
                                         </li>
@@ -71,8 +71,8 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
                         <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Manage Products</a></li>
-                                                <li><a href="#">New Product</a></li>
+                                                <li><a href="/Products/Products.aspx">Manage Products</a></li>
+                                                <li><a href="/Products/Product.aspx">New Product</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
@@ -104,8 +104,8 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers
                         <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">Manage Customers</a></li>
-                                                <li><a href="#">New Customer</a></li>
+                                                <li><a href="/Customers/Customers.aspx">Manage Customers</a></li>
+                                                <li><a href="/Customers/Customer.aspx">New Customer</a></li>
                                                 <li><a href="#">New Shipping Location</a></li>
                                             </ul>
                                         </li>
@@ -113,7 +113,7 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
                         <span class="caret"></span></a>
                                             <ul class="dropdown-menu">
-                                                <li><a href="#">View Products</a></li>
+                                                <li><a href="/Products/Products.aspx">View Products</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
