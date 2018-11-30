@@ -125,7 +125,7 @@ namespace CapstoneProject.Customers
             }
             else if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                //Hide the delete and edit buttons if not admin
+                //Hide the delete button if not admin
                 LinkButton deleteButton = (LinkButton)e.Row.FindControl("BtnDeleteCustomer");
                 LinkButton editButton = (LinkButton)e.Row.FindControl("BtnEditCustomer");
 
@@ -134,7 +134,6 @@ namespace CapstoneProject.Customers
                 if (role != "Admin")
                 {
                     deleteButton.Visible = false;
-                    editButton.Visible = false;
                 }
 
                 //Get the customer for this row
@@ -145,7 +144,7 @@ namespace CapstoneProject.Customers
                 if (customer.Orders.Count > 0)
                 {
                     //Hide the delete button
-                    editButton.Visible = false;
+                    deleteButton.Visible = false;
                 }
             }
         }

@@ -185,6 +185,8 @@
       <LastGenOutput>CapstoneDB.Designer.cs</LastGenOutput>
     </EntityDeploy>
     <Content Include="Images\mapleSyrup.jpg" />
+    <Content Include="Locations\Location.aspx" />
+    <Content Include="Locations\Locations.aspx" />
     <Content Include="Models\CapstoneDB.edmx.diagram">
       <DependentUpon>CapstoneDB.edmx</DependentUpon>
     </Content>
@@ -193,6 +195,7 @@
     <Content Include="Products\Product.aspx" />
     <Content Include="Products\Web.config" />
     <Content Include="Customers\Web.config" />
+    <Content Include="Locations\Web.config" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Models\CapstoneDB.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
@@ -305,6 +308,20 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Locations\Location.aspx.cs">
+      <DependentUpon>Location.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Locations\Location.aspx.designer.cs">
+      <DependentUpon>Location.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Locations\Locations.aspx.cs">
+      <DependentUpon>Locations.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Locations\Locations.aspx.designer.cs">
+      <DependentUpon>Locations.aspx</DependentUpon>
     </Compile>
     <Compile Include="Models\AspNetUser.cs">
       <DependentUpon>CapstoneDB.tt</DependentUpon>
