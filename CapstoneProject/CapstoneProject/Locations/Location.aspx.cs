@@ -46,7 +46,7 @@ namespace CapstoneProject.Locations
                     Models.Location location = context.Locations.Where(o => o.LocationID == locationID).FirstOrDefault();
 
                     //Set the input field values
-                    DDLCustomer.SelectedIndex = location.CustomerID;
+                    DDLCustomer.SelectedValue = location.CustomerID.ToString();
                     TxtAddress.Text = location.Address;
                     TxtPhone.Text = location.PhoneNumber;
                 }
@@ -69,7 +69,7 @@ namespace CapstoneProject.Locations
                 location = context.Locations.Where(o => o.LocationID == locationID).FirstOrDefault();
 
                 //Edit the information
-                location.CustomerID = DDLCustomer.SelectedIndex;
+                location.CustomerID = Convert.ToInt32(DDLCustomer.SelectedValue);
                 location.Address = TxtAddress.Text;
                 location.PhoneNumber = TxtPhone.Text;
 
@@ -79,7 +79,7 @@ namespace CapstoneProject.Locations
             {
                 //Create the location object
                 location = new Models.Location();
-                location.CustomerID = DDLCustomer.SelectedIndex;
+                location.CustomerID = Convert.ToInt32(DDLCustomer.SelectedValue);
                 location.Address = TxtAddress.Text;
                 location.PhoneNumber = TxtPhone.Text;
 

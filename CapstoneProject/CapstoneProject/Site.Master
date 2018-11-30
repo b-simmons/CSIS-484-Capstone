@@ -57,27 +57,24 @@
                             <asp:RoleGroup Roles="Admin">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
-                                        <li><a runat="server" href="~/Default.aspx"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                                        <li><a runat="server" href="~/Default.aspx"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Customers/Customers.aspx">Manage Customers</a></li>
                                                 <li><a href="/Customers/Customer.aspx">New Customer</a></li>
-                                                <li><a href="#">New Shipping Location</a></li>
+                                                <li><a href="/Locations/Locations.aspx">Manage Shipping Locations</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Products/Products.aspx">Manage Products</a></li>
                                                 <li><a href="/Products/Product.aspx">New Product</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Orders/Orders.aspx">Manage Orders</a></li>
                                                 <li><a href="/Orders/Order.aspx">New Order</a></li>
@@ -85,8 +82,7 @@
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users (Admin Only)
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Users<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Admin/ManageUsers.aspx">Manage Users</a></li>
                                                 <li><a href="/Admin/User.aspx">New User</a></li>
@@ -99,26 +95,23 @@
                             <asp:RoleGroup Roles="Sales Rep">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
-                                        <li><a runat="server" href="/Default.aspx"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                                        <li><a runat="server" href="/Default.aspx"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Customers/Customers.aspx">Manage Customers</a></li>
                                                 <li><a href="/Customers/Customer.aspx">New Customer</a></li>
-                                                <li><a href="#">New Shipping Location</a></li>
+                                                <li><a href="/Locations/Locations.aspx">Manage Shipping Locations</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Products/Products.aspx">View Products</a></li>
                                             </ul>
                                         </li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Orders/Orders.aspx">Manage Orders</a></li>
                                                 <li><a href="/Orders/Order.aspx">New Order</a></li>
@@ -130,10 +123,23 @@
                             <asp:RoleGroup Roles="Shipping Clerk">
                                 <ContentTemplate>
                                     <ul class="nav navbar-nav">
-                                        <li><a runat="server" href="/Default.aspx"><span class="glyphicon glyphicon-home"></span>Home</a></li>
+                                        <li><a runat="server" href="/Default.aspx"><span class="glyphicon glyphicon-home"></span> Home</a></li>
                                         <li class="dropdown">
-                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders
-                        <span class="caret"></span></a>
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Customers/Customers.aspx">Manage Customers</a></li>
+                                                <li><a href="/Customers/Customer.aspx">New Customer</a></li>
+                                                <li><a href="/Locations/Locations.aspx">Manage Shipping Locations</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Products<span class="caret"></span></a>
+                                            <ul class="dropdown-menu">
+                                                <li><a href="/Products/Products.aspx">View Products</a></li>
+                                            </ul>
+                                        </li>
+                                        <li class="dropdown">
+                                            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Orders<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Orders/ShipOrder.aspx">Manage Shipments</a></li>
                                             </ul>

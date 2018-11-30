@@ -5,6 +5,16 @@
     <div class="jumbotron">
         <h1 class="text-center">Welcome to the Syrup Inc. Ordering System!</h1>
     </div>
-    <h4 class="text-center">Please use the navigation controls above to proceed.</h4>
-
+    <asp:LoginView runat="server" ViewStateMode="Disabled">
+        <AnonymousTemplate>
+           <div class="text-center">
+                <a href="Account/Login.aspx" class="btn btn-lg btn-primary">Log In</a>
+            </div>
+        </AnonymousTemplate>
+        <LoggedInTemplate>
+            <div class="text-center">
+                <h3>Please use the navigation options above to contine!</h3>
+            </div>
+        </LoggedInTemplate>
+    </asp:LoginView>
 </asp:Content>
