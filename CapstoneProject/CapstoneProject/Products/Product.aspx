@@ -4,8 +4,8 @@
         //Apply input masks
         $j = jQuery.noConflict();
         $j(document).ready(function(){
-            $j(".quantity").inputmask("9[999]");
-            $j(".price").inputmask("9.99");
+            $j(".quantity").inputmask("9[999]", { placeholder: "" });
+            $j(".price").inputmask("$9.99", { placeholder: "" });
         });
     </script>
 </asp:Content>
@@ -48,7 +48,7 @@
         </div>
         <div class="col-md-3">
             <label for="TxtPrice">Price</label>
-            <asp:TextBox ID="TxtPrice" runat="server" CssClass="form-control"></asp:TextBox>
+            <asp:TextBox ID="TxtPrice" runat="server" CssClass="form-control price"></asp:TextBox>
             <asp:RequiredFieldValidator runat="server" ControlToValidate="TxtPrice"
                 CssClass="text-danger" ErrorMessage="The Price field is required." EnableClientScript="true"
                 ValidationGroup="VGProduct" />

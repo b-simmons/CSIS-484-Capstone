@@ -74,7 +74,7 @@ namespace CapstoneProject.Products
                 product.ProductName = TxtProductName.Text;
                 product.Description = TxtProductDescription.Text;
                 product.QuantityInStock = Convert.ToInt32(TxtQuantity.Text);
-                product.Price = Convert.ToInt32(TxtPrice.Text);
+                product.Price = Convert.ToDecimal(TxtPrice.Text);
 
                 context.SaveChanges();
             }
@@ -85,7 +85,7 @@ namespace CapstoneProject.Products
                 product.ProductName = TxtProductName.Text;
                 product.Description = TxtProductDescription.Text;
                 product.QuantityInStock = Convert.ToInt32(TxtQuantity.Text);
-                product.Price = Convert.ToInt32(TxtPrice.Text);
+                product.Price = Convert.ToDecimal(TxtPrice.Text);
 
                 //Save the product object
                 context.Products.Add(product);
