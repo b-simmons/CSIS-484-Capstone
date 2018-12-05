@@ -128,7 +128,6 @@
                                             <a class="dropdown-toggle" data-toggle="dropdown" href="#">Customers<span class="caret"></span></a>
                                             <ul class="dropdown-menu">
                                                 <li><a href="/Customers/Customers.aspx">Manage Customers</a></li>
-                                                <li><a href="/Customers/Customer.aspx">New Customer</a></li>
                                                 <li><a href="/Locations/Locations.aspx">Manage Shipping Locations</a></li>
                                             </ul>
                                         </li>
