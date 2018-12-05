@@ -22,9 +22,10 @@ namespace CapstoneProject.Products
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Get the user
+            //Get the user and role
             manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             user = manager.FindByName(User.Identity.Name);
+            string role = manager.GetRoles(user.Id).FirstOrDefault();
 
             //Get all products
             CapstoneEntities context = new CapstoneEntities();
@@ -33,6 +34,10 @@ namespace CapstoneProject.Products
             //Populate the gridview
             GrProducts.DataSource = allProducts;
             GrProducts.DataBind();
+
+            //Hide the new product button if the user is not an admin
+            if (role != "Admin")
+                BtnNewProduct.Visible = false;
 
             //Show a success message if the query string indicates it
             if (!String.IsNullOrWhiteSpace(Request.QueryString["successmessage"]) && !IsPostBack)

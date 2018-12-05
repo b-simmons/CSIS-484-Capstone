@@ -22,9 +22,10 @@ namespace CapstoneProject.Customers
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //Get the user
+            //Get the user and role
             manager = Context.GetOwinContext().GetUserManager<ApplicationUserManager>();
             user = manager.FindByName(User.Identity.Name);
+            string role = manager.GetRoles(user.Id).FirstOrDefault();
 
             //Get all customers
             CapstoneEntities context = new CapstoneEntities();
@@ -33,6 +34,10 @@ namespace CapstoneProject.Customers
             //Populate the gridview
             GrCustomers.DataSource = allCustomers;
             GrCustomers.DataBind();
+
+            //Don't allow shipping clerks to add new customers
+            if (role == "Shipping Clerk")
+                BtnNewCustomer.Visible = false;
 
             //Show a success message if the query string indicates it
             if (!String.IsNullOrWhiteSpace(Request.QueryString["successmessage"]) && !IsPostBack)
