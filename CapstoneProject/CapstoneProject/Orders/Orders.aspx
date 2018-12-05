@@ -40,7 +40,7 @@
             </asp:TemplateField>
             <asp:TemplateField HeaderText="Order Total">
                 <ItemTemplate>
-                    <asp:Label ID="LblOrderTotal" runat="server" Text='<%# Bind("OrderTotal") %>'></asp:Label>
+                    <asp:Label ID="LblOrderTotal" runat="server" Text='<%# "$" + Eval("OrderTotal") %>'></asp:Label>
                 </ItemTemplate>
             </asp:TemplateField>
             <asp:TemplateField>

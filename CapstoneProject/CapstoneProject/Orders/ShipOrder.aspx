@@ -9,7 +9,7 @@
                 $j("[id$='GrOrders'").DataTable();
             }
             //Apply input masks
-            $j(".date-field").inputmask("99/99/99");
+            $j(".date-field").inputmask("99/99/99", { clearIncomplete: true });
         }
     </script>
 </asp:Content>

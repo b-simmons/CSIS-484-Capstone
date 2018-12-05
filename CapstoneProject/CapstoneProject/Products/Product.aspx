@@ -4,8 +4,8 @@
         //Apply input masks
         $j = jQuery.noConflict();
         $j(document).ready(function(){
-            $j(".quantity").inputmask("9[999]", { placeholder: "" });
-            $j(".price").inputmask("$9.99", { placeholder: "" });
+            $j(".quantity").inputmask("9[999]", { removeMaskOnSubmit: true });
+            $j(".price").inputmask("9.99", { clearIncomplete: true, removeMaskOnSubmit: false });
         });
     </script>
 </asp:Content>

@@ -5,8 +5,8 @@
         //Apply input masks
         $j = jQuery.noConflict();
         $j(document).ready(function(){
-            $j(".quantity").inputmask("9[999]");
-            $j(".date").inputmask("99/99/99");
+            $j(".quantity").inputmask("9[999]", { removeMaskOnSubmit: true });
+            $j(".date").inputmask("99/99/99", { clearIncomplete: true });
         });
     </script>
 </asp:Content>
