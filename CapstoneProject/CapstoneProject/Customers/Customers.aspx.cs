@@ -99,6 +99,16 @@ namespace CapstoneProject.Customers
             //Get the customer to delete
             Models.Customer customerToDelete = context.Customers.Where(o => o.CustomerID == customerID).FirstOrDefault();
 
+            //Get any locations to delete
+            List<Models.Location> locationsToDelete = customerToDelete.Locations.ToList();
+
+            //Delete any related locations
+            foreach(Models.Location location in locationsToDelete)
+            {
+                context.Locations.Remove(location);
+            }
+            context.SaveChanges();
+
             //Delete the customer
             context.Customers.Remove(customerToDelete);
             context.SaveChanges();
